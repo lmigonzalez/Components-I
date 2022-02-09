@@ -87,6 +87,14 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {title: 'Why I Love Web Development',
+    date: 'feb 9th, 2022',
+    firstParagraph: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.`,
+
+    secondParagraph: `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.`,
+
+    thirdParagraph: `There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.`
   }
 ];
 
@@ -115,3 +123,55 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+
+function articleMaker(article){
+
+  const div = document.createElement('div');
+  div.classList.add('article');
+
+  const h2 = document.createElement('h2');
+  h2.textContent = article.title;
+
+  const dateP = document.createElement('p')
+  dateP.className = 'date'
+  dateP.textContent = article.date;
+
+  const paragraph1 = document.createElement('p')
+  paragraph1.textContent = article.firstParagraph;
+
+  const paragraph2 = document.createElement('p')
+  paragraph2.textContent = article.secondParagraph;
+
+  const paragraph3 = document.createElement('p')
+  paragraph3.textContent = article.thirdParagraph;
+
+  const span = document.createElement('span');
+  span.className = 'expandButton'
+  span.textContent = '+'
+
+  
+  div.appendChild(h2)
+  div.appendChild(dateP)
+  div.appendChild(paragraph1)
+  div.appendChild(paragraph2)
+  div.appendChild(paragraph3)
+  div.appendChild(span)
+
+  span.addEventListener('click', expand)
+
+  function expand(e){
+    div.classList.toggle('article-open')
+  }
+
+  return div;
+
+}
+
+const articles = document.querySelector('.articles');
+
+data.forEach(function(element){
+
+  articles.appendChild(articleMaker(element))
+
+})
